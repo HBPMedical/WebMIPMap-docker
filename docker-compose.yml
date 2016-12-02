@@ -24,8 +24,7 @@ version: '2'
 services:
 
   WebMIPMap:
-      #image: "sambuc/hbp-webmipmap"
-    image: "webmipmap"
+    image: "hbpmip/webmipmap"
     container_name: "webmipmap"
     environment:
      - MIPMAP_HOME=/usr/local/tomcat/webmipmap
