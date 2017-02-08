@@ -19,6 +19,19 @@
 FROM tomcat:8.0-jre8-alpine
 MAINTAINER Lionel Sambuc <lionel.sambuc@epfl.ch>
 
+ARG BUILD_DATE
+#ARG VCS_REF
+LABEL org.label-schema.build-date=$BUILD_DATE \
+    org.label-schema.name="hbpmip/webmipmap" \
+    org.label-schema.description="Docker image for running WebMIPMap" \
+    org.label-schema.url="https://github.com/HBPSP8Repo/WebMIPMap-docker" \
+    org.label-schema.vcs-type="git" \
+    #org.label-schema.vcs-ref=$VCS_REF \
+    org.label-schema.vcs-url="https://github.com/HBPSP8Repo/WebMIPMap" \
+    org.label-schema.vendor="WIM AUEB" \
+    org.label-schema.docker.dockerfile="Dockerfile" \
+    org.label-schema.schema-version="1.0"
+    
 RUN mkdir /usr/local/tomcat/webmipmap
 
 COPY WebMIPMap.war /usr/local/tomcat/webapps/webmipmap.war
