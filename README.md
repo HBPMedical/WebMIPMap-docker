@@ -2,10 +2,10 @@
 
 Use the following command to build the WebMIPMap image:
 
-   ```sh
-    $ docker build -t hbpmip/webmipmap \
-    --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` .
-    ```
+```sh
+  $ docker build -t hbpmip/webmipmap \
+  --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` .
+```
     
 This container expects the following to be defined:
 
