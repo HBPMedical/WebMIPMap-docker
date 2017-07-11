@@ -24,10 +24,10 @@ ARG BUILD_DATE
 LABEL org.label-schema.build-date=$BUILD_DATE \
     org.label-schema.name="hbpmip/webmipmap" \
     org.label-schema.description="Docker image for running WebMIPMap" \
-    org.label-schema.url="https://github.com/HBPSP8Repo/WebMIPMap-docker" \
+    org.label-schema.url="https://github.com/HBPMedical/WebMIPMap-docker" \
     org.label-schema.vcs-type="git" \
     #org.label-schema.vcs-ref=$VCS_REF \
-    org.label-schema.vcs-url="https://github.com/HBPSP8Repo/WebMIPMap" \
+    org.label-schema.vcs-url="https://github.com/HBPMedical/WebMIPMap" \
     org.label-schema.vendor="WIM AUEB" \
     org.label-schema.docker.dockerfile="Dockerfile" \
     org.label-schema.schema-version="1.0"
