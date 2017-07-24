@@ -1,0 +1,41 @@
+---
+
+# Version of the Docker image for WebMIPMap to use
+webmipmap_image: 'hbpmip/webmipmap'
+webmipmap_version: latest
+
+# Id of WebMIPMap in Marathon
+webmipmap_marathon_id: /hospital-database/webmipmap
+
+# Attach WebMIPMap to a particular host. The hostname should be the name known by Marathon / Mesos
+webmipmap_marathon_host: '{{ ansible_fqdn }}'
+# Set of constraints to use to place WebMIPMap on some particular host(s)
+webmipmap_marathon_constraints: [["hostname", "CLUSTER", "{{ webmipmap_marathon_host }}"]]
+# Number of instances of WebMIPMap to launch
+webmipmap_instances: 1
+
+webmipmap_admin_port: 31555
+
+# Amount of CPU reserved for WebMIPMap
+webmipmap_cpus: 1.0
+# Amount of memory in mb reserved for WebMIPMap
+webmipmap_mem: 100.0
+
+# Additional parameters for Docker
+webmipmap_docker_parameters: []
+
+webmipmap_postgres_host: '{{ ldsm_db_host }}'
+webmipmap_postgres_port: '{{ ldsm_db_port }}'
+webmipmap_postgres_user: '{{ ldsm_db_user }}'
+webmipmap_postgres_password: '{{ ldsm_db_password }}'
+webmipmap_postgres_db: '{{ ldsm_db_name }}'
+webmipmap_schemata: '{{ ldsm_db_data_dir }}'
+
+webmipmap_env:
+  POSTGRES_HOST: "{{ webmipmap_postgres_host }}"
+  POSTGRES_PORT: "{{ webmipmap_postgres_port }}"
+  POSTGRES_USER: "{{ webmipmap_postgres_user }}"
+  POSTGRES_PASSWORD: "{{ webmipmap_postgres_password }}"
+  POSTGRES_DB: "{{ webmipmap_postgres_db }}"
+
+webmipmap_dependencies: ["{{ ldsm_db_marathon_id }}"]

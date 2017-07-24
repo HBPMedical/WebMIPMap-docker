@@ -1,0 +1,3 @@
+#! /bin/sh
+export MIPMAP_HOME=/usr/local/tomcat/filesystem/
+

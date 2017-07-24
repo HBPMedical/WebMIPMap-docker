@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappingtask>
+  <config>
+    <rewriteSubsumptions>true</rewriteSubsumptions>
+    <rewriteCoverages>true</rewriteCoverages>
+    <rewriteSelfJoins>true</rewriteSelfJoins>
+    <rewriteEGDs>false</rewriteEGDs>
+    <sortStrategy>-1</sortStrategy>
+    <skolemTableStrategy>-1</skolemTableStrategy>
+    <useLocalSkolem>false</useLocalSkolem>
+  </config>
+  <source>
+    <type>CSV</type>
+    <csv>
+      <csv-db-name>Hospital_Data</csv-db-name>
+      <csv-tables>
+        <csv-table>
+          <schema>../Global_Demo/source/ExperimentalDB.csv</schema>
+          <instances />
+        </csv-table>
+        <csv-table>
+          <schema>../Global_Demo/source/Loinc_sample.csv</schema>
+          <instances />
+        </csv-table>
+        <csv-table>
+          <schema>../Global_Demo/source/Patient_Info.csv</schema>
+          <instances />
+        </csv-table>
+        <csv-table>
+          <schema>../Global_Demo/source/Diagnoses.csv</schema>
+          <instances />
+        </csv-table>
+      </csv-tables>
+    </csv>
+    <inclusions />
+    <exclusions />
+    <duplications />
+    <functionalDependencies />
+    <selectionConditions>
+      <selectionCondition>
+        <setPath>Hospital_Data.ExperimentalDB</setPath>
+        <condition>(Hospital_Data.ExperimentalDB.ExperimentalDBTuple.VISCODE == "bl")</condition>
+      </selectionCondition>
+    </selectionConditions>
+    <joinConditions>
+      <joinCondition>
+        <join>
+          <from>Hospital_Data.Loinc_sample.Loinc_sampleTuple.name</from>
+          <to>Hospital_Data.ExperimentalDB.ExperimentalDBTuple.Attribute</to>
+        </join>
+        <foreignKey>true</foreignKey>
+        <mandatory>true</mandatory>
+        <matchString>false</matchString>
+      </joinCondition>
+      <joinCondition>
+        <join>
+          <from>Hospital_Data.Patient_Info.Patient_InfoTuple.hospID</from>
+          <to>Hospital_Data.Diagnoses.DiagnosesTuple.hospID</to>
+        </join>
+        <foreignKey>true</foreignKey>
+        <mandatory>true</mandatory>
+        <matchString>false</matchString>
+      </joinCondition>
+    </joinConditions>
+  </source>
+  <target>
+    <type>CSV</type>
+    <csv>
+      <csv-db-name>MIPMap_demo</csv-db-name>
+      <csv-tables>
+        <csv-table>
+          <schema>../Global_Demo/target/exam_measurement.csv</schema>
+          <instances />
+        </csv-table>
+        <csv-table>
+          <schema>../Global_Demo/target/exam_value.csv</schema>
+          <instances />
+        </csv-table>
+        <csv-table>
+          <schema>../Global_Demo/target/patient.csv</schema>
+          <instances />
+        </csv-table>
+      </csv-tables>
+    </csv>
+    <inclusions />
+    <exclusions />
+    <duplications />
+    <functionalDependencies />
+    <selectionConditions />
+    <joinConditions>
+      <joinCondition>
+        <join>
+          <from>MIPMap_demo.exam_value.exam_valueTuple.exam_measurement_id</from>
+          <to>MIPMap_demo.exam_measurement.exam_measurementTuple.id</to>
+        </join>
+        <foreignKey>true</foreignKey>
+        <mandatory>false</mandatory>
+        <matchString>false</matchString>
+      </joinCondition>
+      <joinCondition>
+        <join>
+          <from>MIPMap_demo.exam_value.exam_valueTuple.patient_id</from>
+          <to>MIPMap_demo.patient.patientTuple.id</to>
+        </join>
+        <foreignKey>true</foreignKey>
+        <mandatory>false</mandatory>
+        <matchString>false</matchString>
+      </joinCondition>
+    </joinConditions>
+  </target>
+  <correspondences>
+    <correspondence>
+      <source-paths>
+        <source-path>Hospital_Data.Loinc_sample.Loinc_sampleTuple.name</source-path>
+      </source-paths>
+      <target-path>MIPMap_demo.exam_measurement.exam_measurementTuple.variable_name</target-path>
+      <transformation-function>Hospital_Data.Loinc_sample.Loinc_sampleTuple.name</transformation-function>
+      <confidence>1.0</confidence>
+    </correspondence>
+    <correspondence>
+      <source-paths>
+        <source-path>Hospital_Data.Loinc_sample.Loinc_sampleTuple.loinc_num</source-path>
+      </source-paths>
+      <target-path>MIPMap_demo.exam_measurement.exam_measurementTuple.loinc_num</target-path>
+      <transformation-function>Hospital_Data.Loinc_sample.Loinc_sampleTuple.loinc_num</transformation-function>
+      <confidence>1.0</confidence>
+    </correspondence>
+    <correspondence>
+      <source-paths>
+        <source-path>Hospital_Data.Loinc_sample.Loinc_sampleTuple.loinc_long_name</source-path>
+      </source-paths>
+      <target-path>MIPMap_demo.exam_measurement.exam_measurementTuple.description</target-path>
+      <transformation-function>Hospital_Data.Loinc_sample.Loinc_sampleTuple.loinc_long_name</transformation-function>
+      <confidence>1.0</confidence>
+    </correspondence>
+    <correspondence>
+      <source-paths>
+        <source-path>Hospital_Data.Loinc_sample.Loinc_sampleTuple.name</source-path>
+      </source-paths>
+      <target-path>MIPMap_demo.exam_measurement.exam_measurementTuple.id</target-path>
+      <transformation-function>append("ExperimentalDB_", Hospital_Data.Loinc_sample.Loinc_sampleTuple.name)</transformation-function>
+      <confidence>1.0</confidence>
+    </correspondence>
+    <correspondence>
+      <source-paths>
+        <source-path>Hospital_Data.ExperimentalDB.ExperimentalDBTuple.RID</source-path>
+      </source-paths>
+      <target-path>MIPMap_demo.patient.patientTuple.id</target-path>
+      <transformation-function>append("ExperimentalDB_", Hospital_Data.ExperimentalDB.ExperimentalDBTuple.RID)</transformation-function>
+      <confidence>1.0</confidence>
+    </correspondence>
+    <correspondence>
+      <source-paths>
+        <source-path>Hospital_Data.ExperimentalDB.ExperimentalDBTuple.PTGENDER</source-path>
+      </source-paths>
+      <target-path>MIPMap_demo.patient.patientTuple.gender</target-path>
+      <transformation-function>Hospital_Data.ExperimentalDB.ExperimentalDBTuple.PTGENDER</transformation-function>
+      <confidence>1.0</confidence>
+    </correspondence>
+    <correspondence>
+      <source-paths />
+      <source-value>"ExperimentalDB"</source-value>
+      <target-path>MIPMap_demo.patient.patientTuple.extracted_from</target-path>
+      <transformation-function>"ExperimentalDB"</transformation-function>
+      <confidence>1.0</confidence>
+    </correspondence>
+    <correspondence>
+      <source-paths />
+      <source-value>"MIPMap"</source-value>
+      <target-path>MIPMap_demo.patient.patientTuple.extraction_method</target-path>
+      <transformation-function>"MIPMap"</transformation-function>
+      <confidence>1.0</confidence>
+    </correspondence>
+    <correspondence>
+      <source-paths />
+      <source-value>datetime()</source-value>
+      <target-path>MIPMap_demo.patient.patientTuple.record_creation</target-path>
+      <transformation-function>datetime()</transformation-function>
+      <confidence>1.0</confidence>
+    </correspondence>
+    <correspondence>
+      <source-paths>
+        <source-path>Hospital_Data.ExperimentalDB.ExperimentalDBTuple.RID</source-path>
+      </source-paths>
+      <target-path>MIPMap_demo.exam_value.exam_valueTuple.patient_id</target-path>
+      <transformation-function>append("ExperimentalDB_", Hospital_Data.ExperimentalDB.ExperimentalDBTuple.RID)</transformation-function>
+      <confidence>1.0</confidence>
+    </correspondence>
+    <correspondence>
+      <source-paths>
+        <source-path>Hospital_Data.ExperimentalDB.ExperimentalDBTuple.value</source-path>
+      </source-paths>
+      <target-path>MIPMap_demo.exam_value.exam_valueTuple.value</target-path>
+      <transformation-function>Hospital_Data.ExperimentalDB.ExperimentalDBTuple.value</transformation-function>
+      <confidence>1.0</confidence>
+    </correspondence>
+    <correspondence>
+      <source-paths>
+        <source-path>Hospital_Data.ExperimentalDB.ExperimentalDBTuple.Attribute</source-path>
+      </source-paths>
+      <target-path>MIPMap_demo.exam_value.exam_valueTuple.exam_measurement_id</target-path>
+      <transformation-function>append("ExperimentalDB_", Hospital_Data.ExperimentalDB.ExperimentalDBTuple.Attribute)</transformation-function>
+      <confidence>1.0</confidence>
+    </correspondence>
+    <correspondence>
+      <source-paths />
+      <source-value>"ExperimentalDB"</source-value>
+      <target-path>MIPMap_demo.exam_value.exam_valueTuple.extracted_from</target-path>
+      <transformation-function>"ExperimentalDB"</transformation-function>
+      <confidence>1.0</confidence>
+    </correspondence>
+    <correspondence>
+      <source-paths />
+      <source-value>"MIPMap"</source-value>
+      <target-path>MIPMap_demo.exam_value.exam_valueTuple.extraction_method</target-path>
+      <transformation-function>"MIPMap"</transformation-function>
+      <confidence>1.0</confidence>
+    </correspondence>
+    <correspondence>
+      <source-paths>
+        <source-path>Hospital_Data.ExperimentalDB.ExperimentalDBTuple.EXAMDATE</source-path>
+      </source-paths>
+      <target-path>MIPMap_demo.exam_value.exam_valueTuple.exam_date</target-path>
+      <transformation-function>Hospital_Data.ExperimentalDB.ExperimentalDBTuple.EXAMDATE</transformation-function>
+      <confidence>1.0</confidence>
+    </correspondence>
+    <correspondence>
+      <source-paths>
+        <source-path>Hospital_Data.ExperimentalDB.ExperimentalDBTuple.AGE</source-path>
+      </source-paths>
+      <target-path>MIPMap_demo.patient.patientTuple.age</target-path>
+      <transformation-function>Hospital_Data.ExperimentalDB.ExperimentalDBTuple.AGE</transformation-function>
+      <confidence>1.0</confidence>
+    </correspondence>
+  </correspondences>
+</mappingtask>
+

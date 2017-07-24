@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappingtask>
+  <config>
+    <rewriteSubsumptions>true</rewriteSubsumptions>
+    <rewriteCoverages>true</rewriteCoverages>
+    <rewriteSelfJoins>true</rewriteSelfJoins>
+    <rewriteEGDs>false</rewriteEGDs>
+    <sortStrategy>-1</sortStrategy>
+    <skolemTableStrategy>-1</skolemTableStrategy>
+    <useLocalSkolem>false</useLocalSkolem>
+  </config>
+  <source>
+    <type>CSV</type>
+    <csv>
+      <csv-db-name>aaaa</csv-db-name>
+      <csv-tables>
+        <csv-table>
+          <schema>source/Book.csv</schema>
+          <instances />
+        </csv-table>
+      </csv-tables>
+    </csv>
+    <inclusions />
+    <exclusions />
+    <duplications />
+    <functionalDependencies />
+    <selectionConditions />
+    <joinConditions />
+  </source>
+  <target>
+    <type>SQL</type>
+    <sql>
+      <sql-db-name>Hospital_DB</sql-db-name>
+      <sql-file>../../../../schemata/Hospital_DB1.sql</sql-file>
+    </sql>
+    <inclusions />
+    <exclusions />
+    <duplications />
+    <functionalDependencies />
+    <selectionConditions />
+    <joinConditions />
+  </target>
+  <correspondences>
+    <correspondence>
+      <source-paths>
+        <source-path>aaaa.Book.BookTuple.id</source-path>
+      </source-paths>
+      <target-path>Hospital_DB.provenance_source.provenance_sourceTuple.extracted_from</target-path>
+      <transformation-function>aaaa.Book.BookTuple.id</transformation-function>
+      <confidence>1.0</confidence>
+    </correspondence>
+    <correspondence>
+      <source-paths>
+        <source-path>aaaa.Book.BookTuple.title</source-path>
+      </source-paths>
+      <target-path>Hospital_DB.provenance_source.provenance_sourceTuple.description</target-path>
+      <transformation-function>aaaa.Book.BookTuple.title</transformation-function>
+      <confidence>1.0</confidence>
+    </correspondence>
+  </correspondences>
+</mappingtask>
+

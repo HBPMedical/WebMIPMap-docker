@@ -1,0 +1,61 @@
+---
+
+- name: Wait for Marathon
+  include: ../../marathon-app/tasks/wait-for-marathon.yml
+  vars:
+    uri: "{{ internal_marathon_url }}"
+
+- name: Remove old WebMIPMap using Marathon
+  marathon_app:
+    uri: "{{ internal_marathon_url }}"
+    id: "{{ webmipmap_marathon_id }}"
+    state: "absent"
+    wait_timeout: 600
+  async: 600
+  poll: 1
+  delegate_to: "{{ groups['control'][0] }}"
+  run_once: true
+
+- name: Launch WebMIPMap using Marathon
+  marathon_app:
+    uri: "{{ internal_marathon_url }}"
+    id: "{{ webmipmap_marathon_id }}"
+    state: "present"
+    docker_image: "{{ webmipmap_image }}:{{ webmipmap_version }}"
+    docker_force_pull_image: true
+    docker_network: BRIDGE
+    docker_port_mappings:
+      - hostPort: "{{ webmipmap_admin_port }}"
+        containerPort: 5555
+        protocol: 'tcp'
+        name: 'http'
+    container_volumes:
+      - containerPath: '/schemata'
+        hostPath: "{{ webmipmap_schemata }}"
+        mode: RW
+    docker_parameters: '{{ webmipmap_docker_parameters }}'
+    env: '{{ webmipmap_env }}'
+    instances: '{{ webmipmap_instances }}'
+    cpus: '{{ webmipmap_cpus }}'
+    mem: '{{ webmipmap_mem }}'
+    ports: []
+    require_ports: false
+    constraints: '{{ webmipmap_marathon_constraints }}'
+    dependencies: '{{ webmipmap_dependencies }}'
+    executor: ""
+    wait_timeout: 600
+    health_checks:
+      - protocol: "{% if marathon_version | version_compare('1.4', '>=') %}MESOS_HTTP{% else %}HTTP{% endif %}"
+        portIndex: 0
+        path: '/'
+        gracePeriodSeconds: 300
+        intervalSeconds: 60
+        timeoutSeconds: 20
+        maxConsecutiveFailures: 2
+    upgrade_strategy:
+      minimumHealthCapacity: 0
+      maximumOverCapacity: 0
+  async: 600
+  poll: 1
+  delegate_to: "{{ groups['control'][0] }}"
+  run_once: true
