@@ -16,7 +16,7 @@ change the variable DB_IP with the new database IP address which is acquired fro
 
 # Build and run web app linked with the created database
 docker build -t webmipmap .
-docker run -d -p 8888:8080 --link database:database webmipmap
+docker run -d -p 8888:8080 --link database:database --name webmipmap webmipmap
 
 
 ------ Necessary Commands --------
