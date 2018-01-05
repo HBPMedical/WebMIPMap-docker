@@ -31,6 +31,12 @@ docker inspect <CONTAINER NAME> | grep '"IPAddress"' | head -n 1
 docker build -t webmipmap .
 docker run -d -p 8888:8080 --link <CONTAINER ALIAS>:<DB CONTAINER NAME> <WEB CONTAINER NAME>
 
+
+------ Restart containers ---------
+# To restart containers run
+docker restart database
+docker restart webmipmap
+
 ------ Additional Commands -------
 
 # Container cleanup script
