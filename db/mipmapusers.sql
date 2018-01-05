@@ -62,25 +62,25 @@ ALTER TABLE public.user_user OWNER TO webmipmap;
 -- Data for Name: mipmapuser; Type: TABLE DATA; Schema: public; Owner: webmipmap
 --
 
-COPY mipmapuser (id, username, role, score, mappings_accepted, mappings_total) FROM stdin;
-3	simpleUserB	user	20	1	5
-4	adminUser	admin	44.4444444444444429	4	9
-5	Ioannis Xarchakos	admin	51.1000000000000014	8	10
-1	Giannis Kazadeis	admin	2.54901960784313708	26	1020
-2	simpleUser	user	90	18	20
-\.
+-- COPY mipmapuser (id, username, role, score, mappings_accepted, mappings_total) FROM stdin;
+-- 3	simpleUserB	user	20	1	5
+-- 4	adminUser	admin	44.4444444444444429	4	9
+-- 5	Ioannis Xarchakos	admin	51.1000000000000014	8	10
+-- 1	Giannis Kazadeis	admin	2.54901960784313708	26	1020
+-- 2	simpleUser	user	90	18	20
+-- \.
 
 
---
--- Data for Name: user_user; Type: TABLE DATA; Schema: public; Owner: webmipmap
---
+-- --
+-- -- Data for Name: user_user; Type: TABLE DATA; Schema: public; Owner: webmipmap
+-- --
 
-COPY user_user ("userA", "userB", status) FROM stdin;
-1	5	1
-4	5	1
-5	4	1
-5	2	0
-\.
+-- COPY user_user ("userA", "userB", status) FROM stdin;
+-- 1	5	1
+-- 4	5	1
+-- 5	4	1
+-- 5	2	0
+-- \.
 
 
 --
