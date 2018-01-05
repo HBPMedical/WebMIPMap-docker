@@ -88,7 +88,7 @@ COPY user_user ("userA", "userB", status) FROM stdin;
 --
 
 ALTER TABLE ONLY mipmapuser
-    ADD CONSTRAINT id_pk PRIMARY KEY (id);
+    ADD CONSTRAINT id_pk PRIMARY KEY (username);
 
 
 --
