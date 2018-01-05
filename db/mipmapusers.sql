@@ -34,7 +34,7 @@ SET default_with_oids = false;
 --
 
 CREATE TABLE mipmapuser (
-    id integer NOT NULL,
+    id serial NOT NULL,
     username text,
     role text,
     score double precision,
